@@ -178,7 +178,12 @@ class SwinTransformerBlock(nn.Module):
         self.mlp_ratio = mlp_ratio
         assert 0 <= self.shift_size < self.window_size, "shift_size must in 0-window_size"
 
-        self.norm1 = norm_layer(dim)
+        self.norm1 = nn.Sequential(
+            nn.Linear(dim, 2*dim),
+            norm_layer(dim),
+            nn.Linear(2*dim, dim)
+        )           
+        # self.norm1 = norm_layer(dim)
         self.attn = WindowAttention(
             dim, window_size=to_2tuple(self.window_size), num_heads=num_heads,
             qkv_bias=qkv_bias, qk_scale=qk_scale, attn_drop=attn_drop, proj_drop=drop)
