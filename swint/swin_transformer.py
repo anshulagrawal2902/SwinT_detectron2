@@ -181,7 +181,8 @@ class SwinTransformerBlock(nn.Module):
         self.norm1 = nn.Sequential(
             nn.Linear(dim, 2*dim),
             norm_layer(2*dim),
-            nn.Linear(2*dim, dim)
+            nn.Linear(2*dim, dim),
+            norm_layer(dim)
         )           
         # self.norm1 = norm_layer(dim)
         self.attn = WindowAttention(
