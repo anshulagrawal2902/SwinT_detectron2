@@ -471,11 +471,11 @@ class SwinTransformer(Backbone):
 
     def __init__(self,
                  pretrain_img_size=224,
-                 patch_size=4,
+                 patch_size=2,
                  in_chans=3,
-                 embed_dim=96,
-                 depths=[2, 2, 6, 2],
-                 num_heads=[3, 6, 12, 24],
+                 embed_dim=48,
+                 depths=[2, 2, 2, 6, 2],
+                 num_heads=[3, 6, 12, 24, 48],
                  window_size=7,
                  mlp_ratio=4.,
                  qkv_bias=True,
@@ -598,6 +598,7 @@ class SwinTransformer(Backbone):
         """Forward function."""
         x = self.patch_embed(x)
 
+
         Wh, Ww = x.size(2), x.size(3)
         if self.ape:
             # interpolate the position embedding to the corresponding size
@@ -644,7 +645,7 @@ def build_swint_backbone(cfg, input_shape):
     out_features = cfg.MODEL.SWINT.OUT_FEATURES
 
     return SwinTransformer(
-        patch_size=4,
+        patch_size=2,
         in_chans=input_shape.channels,
         embed_dim=cfg.MODEL.SWINT.EMBED_DIM,
         depths=cfg.MODEL.SWINT.DEPTHS,
