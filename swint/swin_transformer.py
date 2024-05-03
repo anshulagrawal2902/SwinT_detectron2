@@ -443,6 +443,7 @@ class PatchEmbed(nn.Module):
 
 class SwinTransformer(Backbone):
     """ Swin Transformer backbone.
+
         A PyTorch impl of : `Swin Transformer: Hierarchical Vision Transformer using Shifted Windows`  -
           https://arxiv.org/pdf/2103.14030
     Args:
@@ -545,9 +546,11 @@ class SwinTransformer(Backbone):
             if stage in self.out_features:
                 self._out_feature_channels[stage] = embed_dim * 2 ** i_layer
                 self._out_feature_strides[stage] = 4 * 2 ** i_layer
- 
+
         num_features = [int(embed_dim * 2 ** i) for i in range(self.num_layers)]
         self.num_features = num_features
+art of vision transformer is, once the positional encoding is done - the embedded sequence is fed into the standard transformer. We shall see this in action in the next section.
+
 
         # add a norm layer for each output
         for i_layer in range(self.num_layers):

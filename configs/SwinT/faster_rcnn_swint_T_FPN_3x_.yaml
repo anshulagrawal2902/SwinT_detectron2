@@ -1,6 +1,5 @@
 _BASE_: "../Base-RCNN-FPN.yaml"
 MODEL:
-  WEIGHTS: "swin_tiny_patch4_window7_224_d2.pth"
   MASK_ON: False
   RESNETS:
     DEPTH: 50
