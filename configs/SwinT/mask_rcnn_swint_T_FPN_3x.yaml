@@ -22,7 +22,7 @@ SOLVER:
   AMP:
     ENABLED: True
 TEST:
-  EVAL_PERIOD: 20000 
+  EVAL_PERIOD: 20000
 
 DATASETS:
   TRAIN: ("coco_2017_train",)
